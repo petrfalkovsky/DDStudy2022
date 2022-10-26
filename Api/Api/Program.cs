@@ -1,3 +1,4 @@
+using Api;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<DAL.DataContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSql"), sql => { });
 });
+
+builder.Services.AddAutoMapper(typeof(mapperProfile).Assembly);
 
 var app = builder.Build();
 
