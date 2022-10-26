@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class User
+    public class Uzer
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = "empty";
