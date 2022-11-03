@@ -1,4 +1,5 @@
 using Api;
+using Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<DAL.DataContext>(options =>
 });
 
 builder.Services.AddAutoMapper(typeof(mapperProfile).Assembly);
+
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 

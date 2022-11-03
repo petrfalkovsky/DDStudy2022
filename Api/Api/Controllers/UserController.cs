@@ -1,4 +1,5 @@
 ﻿using Api.Models;
+using Api.Services;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using DAL;
@@ -12,28 +13,17 @@ namespace Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IMapper _mapper;
-        private readonly DAL.DataContext _context;
-
-        public UserController(IMapper mapper, DataContext context)
+        private readonly UserService _userService;
+        public UserController(UserService userService)
         {
-            _mapper = mapper;
-            _context = context;
+            _userService = userService;
         }
 
         [HttpPost]
-        public async Task CreateUser(CreateUserModel model)
-        {
-            var dbUser = _mapper.Map<DAL.Entities.Uzer>(model);
-            await _context.User.AddAsync(dbUser);
-            await _context.SaveChangesAsync();            
-        }
+        public async Task CreateUser(CreateUserModel model) => await _userService.CreateUser(model);
 
         [HttpGet]
-        public async Task<List<UserModel>> GetUsers()
-        {
-            return await _context.User.AsNoTracking().ProjectTo<UserModel>(_mapper.ConfigurationProvider).ToListAsync();
-        }
+        public async Task<List<UserModel>> GetUsers() => await _userService.GetUsers();
 
             
     }
