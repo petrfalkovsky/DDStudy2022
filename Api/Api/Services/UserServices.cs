@@ -19,13 +19,14 @@ namespace Api.Services
 
         public async Task CreateUser(CreateUserModel model)
         {
-            var dbUser = _mapper.Map<DAL.Entities.User>(model);
-            await _context.Users.AddAsync(dbUser);
+            var dbUser = _mapper.Map<DAL.Entities.Uzer>(model);
+            await _context.User.AddAsync(dbUser);
             await _context.SaveChangesAsync();
         }
+
         public async Task<List<UserModel>> GetUsers()
         {
-            return await _context.Users.AsNoTracking().ProjectTo<UserModel>(_mapper.ConfigurationProvider).ToListAsync();
+            return await _context.User.AsNoTracking().ProjectTo<UserModel>(_mapper.ConfigurationProvider).ToListAsync();
         }
     }
 }
