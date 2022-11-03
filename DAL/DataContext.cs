@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class DataContext :DbContext
-  
+    public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -18,12 +17,15 @@ namespace DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Uzer>().HasIndex(f => f.Email).IsUnique();
+            modelBuilder
+                .Entity<User>()
+                .HasIndex(f => f.Email)
+                .IsUnique();
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseNpgsql(
-            b => b.MigrationsAssembly("Api"));
 
-        public DbSet<Uzer> User => Set<Uzer>();
-         
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.UseNpgsql(b => b.MigrationsAssembly("Api"));
+
+        public DbSet<User> Users => Set<User>();
     }
 }
