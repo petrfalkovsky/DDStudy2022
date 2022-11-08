@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Entites;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace DAL.Entities
         public string PasswordHash { get; set; } = "empty"; 
         public DateTimeOffset BirthDay { get; set; }
         public long? AvatarId { get; set; }
-
+        public virtual ICollection<Post>? Posts { get; set; }
         public virtual Avatar? Avatar { get; set; }
         public virtual ICollection<UserSession>? Sessions { get; set; }
     }

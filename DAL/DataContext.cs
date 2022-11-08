@@ -1,4 +1,5 @@
-﻿using DAL.Entities;
+﻿using DAL.Entites;
+using DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,13 +23,12 @@ namespace DAL
                 .HasIndex(f => f.Email)
                 .IsUnique();
             modelBuilder
-               .Entity<User>()
-               .HasIndex(f => f.Name)
-               .IsUnique();
-
+                .Entity<User>()
+                .HasIndex(f => f.Name)
+                .IsUnique();
             modelBuilder.Entity<Avatar>().ToTable(nameof(Avatars));
-        
-    }
+            modelBuilder.Entity<Avatar>().HasOne(b => b.User).WithOne(b => b.Avatar).HasForeignKey<Avatar>(b => b.UserId);
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql(b => b.MigrationsAssembly("Api"));
@@ -36,6 +36,8 @@ namespace DAL
         public DbSet<User> Users => Set<User>();
         public DbSet<UserSession> UserSessions => Set<UserSession>();
         public DbSet<Attach> Attaches => Set<Attach>();
-        public DbSet<Avatar> Avatars => Set<Avatar>();  
+        public DbSet<Avatar> Avatars => Set<Avatar>();
+        public DbSet<Post> Posts => Set<Post>();
+        public DbSet<PostPicture> PostPictures => Set<PostPicture>();
     }
 }
