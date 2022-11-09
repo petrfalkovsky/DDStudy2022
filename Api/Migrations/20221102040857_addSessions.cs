@@ -12,7 +12,7 @@ namespace Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "UserSessions",
+                name: "UserSession",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -23,9 +23,9 @@ namespace Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserSessions", x => x.Id);
+                    table.PrimaryKey("PK_UserSession", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserSessions_Users_UserId",
+                        name: "FK_UserSession_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -33,8 +33,8 @@ namespace Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSessions_UserId",
-                table: "UserSessions",
+                name: "IX_UserSession_UserId",
+                table: "UserSession",
                 column: "UserId");
         }
 
@@ -42,7 +42,7 @@ namespace Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserSessions");
+                name: "UserSession");
         }
     }
 }

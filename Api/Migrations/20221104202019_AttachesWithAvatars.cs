@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Api.Migrations
 {
     /// <inheritdoc />
-    public partial class AttachesWithavatars : Migration
+    public partial class AttachesWithAvatars : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,6 +65,12 @@ namespace Api.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_Name",
+                table: "Users",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Attaches_AuthorId",
                 table: "Attaches",
                 column: "AuthorId");
@@ -92,6 +98,10 @@ namespace Api.Migrations
 
             migrationBuilder.DropIndex(
                 name: "IX_Users_AvatarId",
+                table: "Users");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Users_Name",
                 table: "Users");
 
             migrationBuilder.DropColumn(

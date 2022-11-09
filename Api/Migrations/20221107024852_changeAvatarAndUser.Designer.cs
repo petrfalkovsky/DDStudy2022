@@ -3,6 +3,7 @@ using System;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221107024852_changeAvatarAndUser")]
+    partial class changeAvatarAndUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,28 +58,6 @@ namespace Api.Migrations
                     b.ToTable("Attaches");
 
                     b.UseTptMappingStrategy();
-                });
-
-            modelBuilder.Entity("DAL.Entites.Post", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("DAL.Entites.User", b =>
@@ -149,18 +130,6 @@ namespace Api.Migrations
                     b.ToTable("Avatars", (string)null);
                 });
 
-            modelBuilder.Entity("DAL.Entites.PostPicture", b =>
-                {
-                    b.HasBaseType("DAL.Entites.Attach");
-
-                    b.Property<Guid>("PostId")
-                        .HasColumnType("uuid");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("PostPictures");
-                });
-
             modelBuilder.Entity("DAL.Entites.Attach", b =>
                 {
                     b.HasOne("DAL.Entites.User", "Author")
@@ -170,17 +139,6 @@ namespace Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
-                });
-
-            modelBuilder.Entity("DAL.Entites.Post", b =>
-                {
-                    b.HasOne("DAL.Entites.User", "User")
-                        .WithMany("Posts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DAL.Entites.UserSession", b =>
@@ -211,33 +169,9 @@ namespace Api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DAL.Entites.PostPicture", b =>
-                {
-                    b.HasOne("DAL.Entites.Attach", null)
-                        .WithOne()
-                        .HasForeignKey("DAL.Entites.PostPicture", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DAL.Entites.Post", "Post")
-                        .WithMany("PostPictures")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-                });
-
-            modelBuilder.Entity("DAL.Entites.Post", b =>
-                {
-                    b.Navigation("PostPictures");
-                });
-
             modelBuilder.Entity("DAL.Entites.User", b =>
                 {
                     b.Navigation("Avatar");
-
-                    b.Navigation("Posts");
 
                     b.Navigation("Sessions");
                 });

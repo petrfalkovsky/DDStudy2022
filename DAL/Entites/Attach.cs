@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace DAL.Entites
 {
     public class Attach
     {
@@ -13,8 +13,6 @@ namespace DAL.Entities
         public string MimeType { get; set; } = null!;
         public string FilePath { get; set; } = null!;
         public long Size { get; set; }
-
         public virtual User Author { get; set; }
-
     }
 }

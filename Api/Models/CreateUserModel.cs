@@ -5,14 +5,14 @@ namespace Api.Models
     public class CreateUserModel
     {
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = "empty";
         [Required]
-        public string Email { get; set; } 
+        public string Email { get; set; } = "empty";
         [Required]
-        public string Password { get; set; }
+        public string Password { get; set; } = "empty";
         [Required]
         [Compare(nameof(Password))]
-        public string RetryPassword { get; set; } 
+        public string RetryPassword { get; set; } = "empty";
         [Required]
         public DateTimeOffset BirthDate { get; set; }
 
@@ -23,6 +23,6 @@ namespace Api.Models
             Password = password;
             RetryPassword = retryPassword;
             BirthDate = birthDate;
-        }   
+        }
     }
 }
