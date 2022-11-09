@@ -11,18 +11,17 @@ namespace Api.Controllers
     {
         private readonly UserService _userService;
 
-        public AuthController(UserService userService)
+        public AuthController (UserService userService)
         {
             _userService = userService;
         }
 
+        [HttpPost]
+        public async Task<TokenModel> Token(TokenRequestModel model) 
+            => await _userService.GetToken(model.login, model.pass);
 
         [HttpPost]
-        public async Task<TokenModel> Token(TokenRequestModel model)
-            => await _userService.GetToken(model.Login, model.Pass);
-
-        [HttpPost]
-        public async Task<TokenModel> RefreshToken(RefreshTokenRequestModel model)
-            => await _userService.GetTokenByRefreshToken(model.RefreshToken);
+        public async Task<TokenModel> RefreshToken(RefreshTokenRequestModel model) 
+            => await _userService.GetTokenByRefresh(model.RefreshToken);
     }
 }

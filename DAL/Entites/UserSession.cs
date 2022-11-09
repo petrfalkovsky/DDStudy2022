@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace DAL.Entites
 {
     public class UserSession
     {
@@ -13,11 +13,6 @@ namespace DAL.Entities
         public Guid RefreshToken { get; set; }
         public DateTimeOffset Created { get; set; }
         public bool IsActive { get; set; } = true;
-
         public virtual User? User { get; set; }
-
-
-
-
     }
 }

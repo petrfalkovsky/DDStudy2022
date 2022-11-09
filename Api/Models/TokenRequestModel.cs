@@ -2,13 +2,12 @@
 {
     public class TokenRequestModel
     {
-        public string Login { get; set; }
-        public string Pass { get; set; }
-
-        public TokenRequestModel(string login, string pass)
+        public string login { get; set; }
+        public string pass { get; set; }
+        public TokenRequestModel (string login, string pass)
         {
-            Login = login;
-            Pass = pass;
+            this.login = login;
+            this.pass = pass;
         }
     }
 
